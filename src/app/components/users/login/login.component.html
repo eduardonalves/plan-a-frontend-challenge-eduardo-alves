@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="username" placeholder="E-mail " formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="(loginForm.controls['username'].dirty || loginForm.controls['username'].touched) && loginForm.controls['username'].errors" class="errors">
+        <span *ngIf="loginForm.controls['username'].errors?.['required']">E-mail is required</span>
+        <span *ngIf="loginForm.controls['username'].invalid">E-mail  is invalid</span>
+      </div>
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(loginForm.controls['password'].dirty || loginForm.controls['password'].touched) && loginForm.controls['password'].errors" class="errors">
+        <span *ngIf="loginForm.controls['password'].errors?.['required']">Password is required</span>
+        <span *ngIf="loginForm.controls['password'].errors?.minlength">Password needs to be 6 characters</span>
+      </div>
+      <div *ngIf="hasAuthErrors" class="errors">
+        <span *ngIf="hasAuthErrors">E-mail or Password are incorrect. Please check these fields and try again!</span>
+      </div>
+    </div>
+    <ion-button type="submit" expand="block" [disabled]="!loginForm.valid">
+    
+      Log in
+      
+    </ion-button>
+    
+  </form>
+</ion-content>
